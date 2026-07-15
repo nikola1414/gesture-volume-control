@@ -19,6 +19,8 @@ while True:
         break
 
     img = detector.findHands(img)
+    lmList = detector.findPositioning(img,draw = False)
+    print(lmList)
 
     
     cv2.imshow("Volume Controler", img)
