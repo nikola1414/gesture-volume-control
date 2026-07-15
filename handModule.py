@@ -59,23 +59,3 @@ class handDetector():
                 if draw:
                     cv2.circle(img,(cx,cy), 15, (255,0,255), cv2.FILLED)
         return lmList
-
-
-""""
-def main():
-    pTime = 0
-    cTime = 0
-    cap = cv2.videoCapture
-    detector = handDetector()
-    while True: 
-        success, img = cap.read()
-        img = detector.findHands(img)
-        lmList = detector.findPostioning(img)
-        if len(lmList)!=0:
-            print(lmList[4])
-
-
-
-if __name__ == "__main__":
-    main()
-"""
