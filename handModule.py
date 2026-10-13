@@ -2,6 +2,7 @@
 import cv2
 import mediapipe as mp
 
+
 class handDetector():
     def __init__(self,staticMode = False, maxHands = 2, detectionCon =0.5, trackCon = 0.5):
         self.mode = staticMode 
@@ -22,6 +23,8 @@ class handDetector():
             color=(89, 162, 95), 
             thickness=2          
         )       
+
+        self.results = None
 
         self.hands = self.mp_hands.Hands(
             static_image_mode=self.mode, 
@@ -50,8 +53,9 @@ class handDetector():
 
     def findPositioning(self, img, handNo=0, draw = True):
         lmList = []
-        if self.results.multi_hand_landmarks:
-            myHand = self.results.multi_hand_landmarks[handNo]
+        hands_found = self.results.multi_hand_landmarks if self.results else None
+        if hands_found and handNo < len(hands_found):
+            myHand = hands_found[handNo]
             for id, lm in enumerate(myHand.landmark):
                 h,w,c = img.shape
                 cx , cy = int(lm.x*w), int(lm.y*h)
